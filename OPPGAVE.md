@@ -9,7 +9,7 @@ Denne funksjonalitene vil bli kjernen av eksamensinnleveringen. Dere kan valgfri
 
 Oppgaven skal utvikles med parprogrammering og test-drevet utvikling og dere må ha et omfattende sett med tester som skal kjøre automatisk med Travis CI. Oppgaven skal utvikles med GitHub Classroom og dere må benytte linken dere har fått i Canvas til repository. Repository må linke til Travis CI.
 
-Dere skal finne en annen gruppe som dere skal gi hverandrevurdering til. Del prosjektene med hverandre på GitHub og skriv minst to "bra at ..." issues og to "programmet bør..." issues. *Opprett en link i README.md til issues dere gir til den andre gruppen slik at vi kan finne disse*
+Dere skal finne en annen gruppe som dere skal gi hverandre vurdering til. Del prosjektene med hverandre på GitHub og skriv minst to "bra at ..." issues og to "programmet bør..." issues. *Opprett en link i README.md til issues dere gir til den andre gruppen slik at vi kan finne disse*
 
 Programmet vil testes ut som følger når det vurderes:
 
@@ -23,6 +23,8 @@ Programmet vil testes ut som følger når det vurderes:
    * Programmet bruker Flyway til å opprette databasetabeller
    * Programmet skriver ut innholdet av prosjekt-deltager-tabellen
    * Programmet ber brukeren skrive inn navn og email-adresse på en ny bruker
+   
+   
    
 Dersom dere vil ta oppgaven videre for å være forberedt til eksamen kan dere *valgfritt* legge til mer funksjonalitet:
 
