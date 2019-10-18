@@ -1,9 +1,12 @@
 package no.group37;
 
+import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Scanner;
 
 
 public class ProjectDao {
@@ -42,7 +46,7 @@ public class ProjectDao {
                     List<String> result = new ArrayList<>();
 
                     while (rs.next()) {
-                        result.add(rs.getString("projectName"));
+                        result.add(rs.getString("name"));
                     }
 
                     return result;
@@ -51,17 +55,24 @@ public class ProjectDao {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, IOException {
+        System.out.println("Add a new project");
+        String projectName = new Scanner(System.in).nextLine();
 
         Properties properties = new Properties();
-        properties.load(new FileReader("projectdb.poperties"));
+        properties.load(new FileReader("projectdb.properties"));
 
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
         dataSource.setUrl(properties.getProperty("dataSource.url"));
         dataSource.setPassword(properties.getProperty("dataSource.password"));
         dataSource.setUser(properties.getProperty("dataSource.user"));
 
+        Flyway.configure().dataSource(dataSource).load().migrate();
 
+        ProjectDao tidyProject = new ProjectDao(dataSource);
+        tidyProject.insertProject(projectName);
+
+        System.out.println(tidyProject.listAll());
     }
 
 }

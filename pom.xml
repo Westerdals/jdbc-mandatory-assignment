@@ -53,6 +53,12 @@
             <artifactId>flyway-core</artifactId>
             <version>6.0.6</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.logevents</groupId>
+            <artifactId>logevents</artifactId>
+            <version>0.1.22</version>
+        </dependency>
     </dependencies>
 
     <!--
