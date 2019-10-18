@@ -31,12 +31,11 @@ public class MemberToProjectTest {
         MemberDao memberDao = new MemberDao(dataSource);
         String projectName = "Ridekurs";
         projectDao.insert(projectName);
+       //not finished!
 
-        memberDao.insert(member);
 
 
-        //assertThat(memberDao.listAll()).contains(member);
-        //assertThat(projectDao.listAll().contains(projectName));
+        //assertThat(member).hasNoNullFieldsOrProperties();
 
     }
 }
