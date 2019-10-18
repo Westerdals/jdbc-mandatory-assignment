@@ -54,8 +54,8 @@ public class ProjectDao extends AbstractDao<String> {
         System.out.println(tidyProject.listAll());
     }
 
-    public void insert(String projectName) throws SQLException {
-        insert(projectName, "insert into projects (name) values (?)");
+    public long insert(String projectName) throws SQLException {
+        return insert(projectName, "insert into projects (name) values (?)");
     }
 
     public List<String> listAll() throws SQLException {

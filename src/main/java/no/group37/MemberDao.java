@@ -55,14 +55,15 @@ public class MemberDao extends AbstractDao<Member> {
         member.setMail(email);
         MemberDao memberDao = new MemberDao(dataSource);
         memberDao.insert(member);
+        // im gonna turn this line below into a method :P so its not that long. the code below does that we dont print brackets of array anymore so it looks nicer
         System.out.println(Arrays.toString((memberDao.listAll()).toArray()).replace("[", " ").replace("]", "").replace(",",""));
-        //System.out.println(memberDao.listAll());
+
 
 
     }
 
-    public void insert(Member member) throws SQLException {
-        insert(member, "insert into members (member_name, email) values (?, ?)");
+    public long insert(Member member) throws SQLException {
+         return insert(member, "insert into members (member_name, email) values (?, ?)");
     }
 
     public List<Member> listAll() throws SQLException {
