@@ -37,21 +37,21 @@ Dersom dere vil ta oppgaven videre for å være forberedt til eksamen kan dere *
 
 ## Sjekkliste for å få godkjent
 
-* [ ] Koden er sjekket inn på github.com/Westerdals-repository
-* [ ] `README.md` inneholder en korrekt link til Travis CI
+* [x] Koden er sjekket inn på github.com/Westerdals-repository
+* [x] `README.md` inneholder en korrekt link til Travis CI
 * [ ] `mvn package` bygger en executable jar-fil
 * [ ] `java -jar target/...jar` (etter `mvn package`) starter opp en webserver
 * [ ] `README.md` beskriver prosjektet, hvordan man bygger det og hvordan man kjører det 
-* [ ] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `task-manager.properties` for å connecte til databasen
-* [ ] Programmet bruker Flywaydb for å sette opp databaseskjema
+* [x] Programmet leser `dataSource.url`, `dataSource.username` og `dataSource.password` fra `task-manager.properties` for å connecte til databasen
+* [x] Programmet bruker Flywaydb for å sette opp databaseskjema
 * [ ] Programmet kan liste prosjektdeltagere fra databasen
-* [ ] Programmet lar bruker opprette nye prosjektdeltagere i databasen
+* [x] Programmet lar bruker opprette nye prosjektdeltagere i databasen
 * [ ] Koden inneholder et godt sett med tester og testene kjører i Travis CI
-* [ ] GitHub repository er private, men delt med gruppen dere gjør hverandrevurdering på
+* [ ] GitHub repository er private, men delt med gruppen dere gjør hverandre vurdering på
 * [ ] Dere har mottatt minst 2 positive og 2 korrektive GitHub issues i github repository fra en annen gruppe
 * [ ] Dere har gitt minst 2 positive og 2 korrektive GitHub issues til en annen gruppe og inkluderer link til disse fra README.md
 * [x] Veilederne er lagt til som Collaborators på GitHub repository (`alacho2`, `aridder`, `asmadsen`)
-* [ ] Dere har committed kode med begge prosjektdeltagernes GitHub konto
+* [x] Dere har committed kode med begge prosjektdeltagernes GitHub konto
 * [ ] Dere har registrert link til GitHub repository i Canvas
 
 ## Sjekkliste for god leveranse

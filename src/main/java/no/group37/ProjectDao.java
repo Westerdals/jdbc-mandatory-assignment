@@ -6,54 +6,32 @@ import org.postgresql.ds.PGSimpleDataSource;
 import javax.sql.DataSource;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
 
-public class ProjectDao {
-
-    private DataSource dataSource;
+public class ProjectDao extends AbstractDao<String> {
 
 
     public ProjectDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+        super(dataSource);
     }
 
-    public void insertProject(String projectName) throws SQLException {
+    @Override
+    public void insertProject(String projectName, PreparedStatement statement) throws SQLException {
 
-        try (Connection conn = dataSource.getConnection()) {
-             PreparedStatement statement = conn.prepareStatement(
-                    "insert into projects (name) values (?)"
-            );
-            statement.setString(1,projectName);
-            statement.executeUpdate();
-        }
+        statement.setString(1, projectName);
     }
 
 
-    public List<String> listAll() throws SQLException {
-        try (Connection connection = dataSource.getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "select * from projects"
-            )) {
-                try (ResultSet rs = statement.executeQuery()) {
-                    List<String> result = new ArrayList<>();
-
-                    while (rs.next()) {
-                        result.add(rs.getString("name"));
-                    }
-
-                    return result;
-                }
-            }
-        }
+    @Override
+    protected String readObject(ResultSet rs) throws SQLException {
+        return rs.getString("name");
     }
+
 
     public static void main(String[] args) throws SQLException, IOException {
         System.out.println("Add a new project");
@@ -70,7 +48,7 @@ public class ProjectDao {
         Flyway.configure().dataSource(dataSource).load().migrate();
 
         ProjectDao tidyProject = new ProjectDao(dataSource);
-        tidyProject.insertProject(projectName);
+        tidyProject.insert(projectName);
 
         System.out.println(tidyProject.listAll());
     }

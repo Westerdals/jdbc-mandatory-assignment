@@ -22,7 +22,7 @@ public class projectTest {
 
         ProjectDao dao = new ProjectDao(dataSource);
         String projectName = "Java Project";
-        dao.insertProject(projectName);
+        dao.insert(projectName);
         assertThat(dao.listAll()).contains(projectName);
     }
 
