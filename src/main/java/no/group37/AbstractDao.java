@@ -15,14 +15,14 @@ public abstract class AbstractDao<T> {
         this.dataSource = dataSource;
     }
 
-    public abstract void insertProject(T project, PreparedStatement statement) throws SQLException;
+    public abstract void insertObject(T project, PreparedStatement statement) throws SQLException;
 
     public void insert(T projectName) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
             PreparedStatement statement = conn.prepareStatement(
                     "insert into projects (name) values (?)"
             );
-            insertProject(projectName, statement);
+            insertObject(projectName, statement);
             statement.executeUpdate();
         }
     }

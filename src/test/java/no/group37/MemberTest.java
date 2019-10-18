@@ -17,10 +17,11 @@ public class MemberTest {
 
         Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
 
+        Member member = new Member();
+        member.setMemberName("Ingrid");
+        member.setMail("ingrid@gmail.com");
         MemberDao memberDao = new MemberDao(dataSource);
-        String memberName = "Ingrid";
-        String email = "ingrid@mail.no";
-        memberDao.insertMember(memberName, email);
-        assertThat(memberDao.listAll()).contains(memberName);
+        memberDao.insert(member);
+        assertThat(memberDao.listAll()).contains(member);
     }
 }

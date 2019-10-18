@@ -21,7 +21,7 @@ public class ProjectDao extends AbstractDao<String> {
     }
 
     @Override
-    public void insertProject(String projectName, PreparedStatement statement) throws SQLException {
+    public void insertObject(String projectName, PreparedStatement statement) throws SQLException {
 
         statement.setString(1, projectName);
     }

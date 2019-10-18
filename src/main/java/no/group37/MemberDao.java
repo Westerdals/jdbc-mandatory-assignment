@@ -13,42 +13,34 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
-public class MemberDao {
+public class MemberDao extends AbstractDao<Member> {
 
-    private DataSource dataSource;
-
-
+    private List<Member> members = new ArrayList<>();
 
     public MemberDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+        super(dataSource);
     }
 
-    public void insertMember(String memberName, String email) throws SQLException {
-
-        try(Connection conn = dataSource.getConnection()){
-            PreparedStatement statement = conn.prepareStatement(
-                    "insert into members (member_name, email) values (?, ?)");
-            statement.setString(1,memberName );
-            statement.setString(2,email);
-            statement.executeUpdate();
-        }
+    public void insert(Member member){
+        members.add(member);
     }
-    public List<String> listAll() throws SQLException {
-        try(Connection conn = dataSource.getConnection()){
-            try(PreparedStatement statement = conn.prepareStatement(
-                    "SELECT  * FROM members"
-            )) {
-                try(ResultSet rs = statement.executeQuery()){
-                    List<String> result = new ArrayList<>();
 
-                    while (rs.next()) {
-                        result.add(rs.getString("member_name"));
-                        result.add(rs.getString("email"));
-                    }
-                    return result;
-                }
-            }
-        }
+    @Override
+    public void insertObject(Member member, PreparedStatement statement) throws SQLException {
+        statement.setString(1, member.getMemberName());
+        statement.setString(2, member.getMail());
+    }
+
+    public List<Member> listAll() throws SQLException {
+        return members;
+    }
+
+    @Override
+    protected Member readObject(ResultSet rs) throws SQLException {
+        Member member = new Member();
+        member.setMemberName(rs.getString(1));
+        member.setMail(rs.getString(2));
+        return member;
     }
 
     public static void main(String[] args) throws IOException, SQLException {
@@ -69,8 +61,12 @@ public class MemberDao {
 
         Flyway.configure().dataSource(dataSource).load().migrate();
 
+
+        Member member = new Member();
+        member.setMemberName(memberName);
+        member.setMail(email);
         MemberDao memberDao = new MemberDao(dataSource);
-        memberDao.insertMember(memberName, email);
+        memberDao.insert(member);
         System.out.println(memberDao.listAll());
 
     }
