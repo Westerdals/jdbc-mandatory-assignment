@@ -20,6 +20,7 @@ public class MemberTest {
         Member member = new Member();
         member.setMemberName("Ingrid");
         member.setMail("ingrid@gmail.com");
+        member.setId(1);
         MemberDao memberDao = new MemberDao(dataSource);
         memberDao.insert(member);
         assertThat(memberDao.listAll()).contains(member);

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -53,4 +54,11 @@ public class ProjectDao extends AbstractDao<String> {
         System.out.println(tidyProject.listAll());
     }
 
+    public void insert(String projectName) throws SQLException {
+        insert(projectName, "insert into projects (name) values (?)");
+    }
+
+    public List<String> listAll() throws SQLException {
+        return listAll("select * from projects");
+    }
 }

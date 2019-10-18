@@ -4,7 +4,6 @@ import org.flywaydb.core.Flyway;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
@@ -15,14 +14,9 @@ import java.util.Scanner;
 
 public class MemberDao extends AbstractDao<Member> {
 
-    private List<Member> members = new ArrayList<>();
 
     public MemberDao(DataSource dataSource) {
         super(dataSource);
-    }
-
-    public void insert(Member member){
-        members.add(member);
     }
 
     @Override
@@ -31,15 +25,12 @@ public class MemberDao extends AbstractDao<Member> {
         statement.setString(2, member.getMail());
     }
 
-    public List<Member> listAll() throws SQLException {
-        return members;
-    }
-
     @Override
     protected Member readObject(ResultSet rs) throws SQLException {
         Member member = new Member();
-        member.setMemberName(rs.getString(1));
-        member.setMail(rs.getString(2));
+        member.setId(rs.getLong("id"));
+        member.setMemberName(rs.getString("member_name"));
+        member.setMail(rs.getString("email"));
         return member;
     }
 
@@ -69,5 +60,14 @@ public class MemberDao extends AbstractDao<Member> {
         memberDao.insert(member);
         System.out.println(memberDao.listAll());
 
+
+    }
+
+    public void insert(Member member) throws SQLException {
+        insert(member, "insert into members (member_name, email) values (?, ?)");
+    }
+
+    public List<Member> listAll() throws SQLException {
+        return listAll("select * from members");
     }
 }
