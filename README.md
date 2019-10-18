@@ -1,6 +1,6 @@
 # <Skriv tittel på prosjektet>
 
-[![Build Status](https://travis-ci.com/Westerdals/prosjektnavn.svg?token=Sj4fcBr8hVerjvQWkoAz&branch=master)](https://travis-ci.com/Westerdals/prosjektnavn)
+[![Build Status](https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs.svg?token=142TxL5hMPVBB9ybKETZ&branch=master)](https://travis-ci.com/Westerdals/prosjektnavn)
 
 <En kort forklaring på hva dette prosjektet inneholder>
 
