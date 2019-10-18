@@ -24,7 +24,7 @@ public class projectTest {
         ProjectDao dao = new ProjectDao(dataSource);
         String projectName = "Java Project";
         dao.insertProject(projectName);
-        Assertions.assertThat(dao.listAll()).contains(projectName);
+        assertThat(dao.listAll()).contains(projectName);
     }
 
     private String pickOne(String[] strings) {
