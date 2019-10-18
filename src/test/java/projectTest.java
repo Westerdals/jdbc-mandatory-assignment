@@ -1,17 +1,20 @@
 import org.junit.jupiter.api.Test;
-
-import javax.sql.DataSource;
-
+import java.util.Random;
 import static org.assertj.core.api.Assertions.*;
 
-public class projectTest {
 
+
+public class projectTest {
 
     @Test
     void shouldRetrieveStoredProjects() {
         ProjectDao dao = new ProjectDao();
-        // String memberName = pickOne(new String[] {"Java", "JavaScript", "Informasjonssikkerhet", "Smidig"});
-        dao.insertProject("Design");
-        assertThat(dao.listAll()).contains("Design");
+        String projectName = pickOne(new String[] {"Design", "Java", "JavaScript", "Informasjonssikkerhet", "Smidig"});
+        dao.insertProject(projectName);
+        assertThat(dao.listAll()).contains(projectName);
+    }
+
+    private String pickOne(String[] strings) {
+        return strings[new Random().nextInt(strings.length)];
     }
 }

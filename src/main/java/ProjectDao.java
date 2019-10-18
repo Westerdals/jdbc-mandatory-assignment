@@ -1,15 +1,18 @@
-import javax.sql.DataSource;
-import java.util.Collections;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class ProjectDao {
-    public void insertProject(String design) {
 
+    private List<String> projects = new ArrayList<>();
+
+    public void insertProject(String projectName) {
+        projects.add(projectName);
     }
 
     public List<String> listAll() {
-        return Collections.singletonList("Design");
+        return projects;
     }
 
 }
