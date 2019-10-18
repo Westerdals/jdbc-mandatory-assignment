@@ -32,11 +32,13 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member{" +
+        return   id + ". Name: " + memberName + " Email: " + mail + "\n";
+
+                /*"Member{" +
                 "memberName='" + memberName + '\'' +
                 ", mail='" + mail + '\'' +
                 ", id ='" + id + '\'' +
-                '}';
+                '}'; */
     }
 
 }

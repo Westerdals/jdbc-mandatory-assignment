@@ -7,10 +7,7 @@ import javax.sql.DataSource;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 public class MemberDao extends AbstractDao<Member> {
 
@@ -58,7 +55,8 @@ public class MemberDao extends AbstractDao<Member> {
         member.setMail(email);
         MemberDao memberDao = new MemberDao(dataSource);
         memberDao.insert(member);
-        System.out.println(memberDao.listAll());
+        System.out.println(Arrays.toString((memberDao.listAll()).toArray()).replace("[", " ").replace("]", "").replace(",",""));
+        //System.out.println(memberDao.listAll());
 
 
     }
