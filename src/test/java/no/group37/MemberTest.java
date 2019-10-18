@@ -15,7 +15,7 @@ public class MemberTest {
         JdbcDataSource dataSource = new JdbcDataSource();
         dataSource.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
 
-        Flyway.configure().dataSource(dataSource).load().migrate();
+        Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
 
         MemberDao memberDao = new MemberDao(dataSource);
         String memberName = "Ingrid";
