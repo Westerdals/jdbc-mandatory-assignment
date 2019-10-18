@@ -1,4 +1,7 @@
+import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.Test;
+
+import java.sql.SQLException;
 import java.util.Random;
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,10 +10,14 @@ import static org.assertj.core.api.Assertions.*;
 public class projectTest {
 
     @Test
-    void shouldRetrieveStoredProjects() {
+    void shouldRetrieveStoredProjects() throws SQLException {
+        JdbcDataSource dataSource = new JdbcDataSource();
+        dataSource.setUrl("jdbc:h2:mem:test");
 
-        ProjectDao dao = new ProjectDao();
-        String projectName = pickOne(new String[] {"Design", "Java", "JavaScript", "Informasjonssikkerhet", "Smidig"});
+        dataSource.getConnection().createStatement().execute("create table projects (name varchar(100) not null)");
+
+        ProjectDao dao = new ProjectDao(dataSource);
+        String projectName = "Java Project";
         dao.insertProject(projectName);
         assertThat(dao.listAll()).contains(projectName);
     }
