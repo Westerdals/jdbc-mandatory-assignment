@@ -1,6 +1,7 @@
 package no.group37;
 
 import org.assertj.core.api.Assertions;
+import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.Test;
 
@@ -15,11 +16,9 @@ public class projectTest {
     @Test
     void shouldRetrieveStoredProjects() throws SQLException {
         JdbcDataSource dataSource = new JdbcDataSource();
-        dataSource.setUrl("jdbc:h2:mem:test");
+        dataSource.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
 
-        dataSource.getConnection().createStatement().execute(
-                "create table projects (name varchar(100) not null)"
-        );
+        Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
 
         ProjectDao dao = new ProjectDao(dataSource);
         String projectName = "Java Project";
