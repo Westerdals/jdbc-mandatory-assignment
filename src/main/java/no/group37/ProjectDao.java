@@ -33,4 +33,8 @@ public class ProjectDao {
         return projects;
     }
 
+    public static void main(String[] args) {
+
+    }
+
 }
