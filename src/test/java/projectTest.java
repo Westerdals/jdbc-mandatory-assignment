@@ -8,6 +8,7 @@ public class projectTest {
 
     @Test
     void shouldRetrieveStoredProjects() {
+
         ProjectDao dao = new ProjectDao();
         String projectName = pickOne(new String[] {"Design", "Java", "JavaScript", "Informasjonssikkerhet", "Smidig"});
         dao.insertProject(projectName);
