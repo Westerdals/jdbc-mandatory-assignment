@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 
 
 
-public class projectTest {
+public class ProjectTest {
 
     @Test
     void shouldRetrieveStoredProjects() throws SQLException {

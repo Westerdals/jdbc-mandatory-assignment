@@ -4,19 +4,19 @@ public class Member {
     private String memberName;
     private String mail;
 
-    public void setMemberName(String memberName){
+    public void setMemberName(String memberName) {
         this.memberName = memberName;
     }
 
-    public String getMemberName(){
-        return memberName;
+    public String getMemberName() {
+        return this.memberName;
     }
 
-    public void setMail(String mail){
+    public void setMail(String mail) {
         this.mail = mail;
     }
 
-    public String getMail(){
+    public String getMail() {
         return this.mail;
     }
 
