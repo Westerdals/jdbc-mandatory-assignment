@@ -20,7 +20,7 @@ public abstract class AbstractDao<T> {
 
     public long insert(T projectName, String sql1) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
-            try(PreparedStatement statement = conn.prepareStatement(sql1,PreparedStatement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement statement = conn.prepareStatement(sql1, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 insertObject(projectName, statement);
                 statement.executeUpdate();
 

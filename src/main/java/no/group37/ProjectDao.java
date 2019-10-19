@@ -55,10 +55,14 @@ public class ProjectDao extends AbstractDao<String> {
     }
 
     public long insert(String projectName) throws SQLException {
-        return insert(projectName, "insert into projects (name) values (?)");
+        return insert(projectName,
+                "insert into projects (name) values (?)"
+        );
     }
 
     public List<String> listAll() throws SQLException {
-        return listAll("select * from projects");
+        return listAll(
+                "select * from projects"
+        );
     }
 }

@@ -1,6 +1,5 @@
 package no.group37;
 
-import org.assertj.core.api.Assertions;
 import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.Test;

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
-import static org.assertj.core.api.Assertions.*;
 
 public class MemberTest {
 
