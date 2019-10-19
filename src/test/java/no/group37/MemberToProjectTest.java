@@ -25,10 +25,10 @@ public class MemberToProjectTest {
 
         Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
 
-        MemberToProjectDao memberToProjectDao = new MemberToProjectDao(dataSource);
         MemberToProject memberToProject = new MemberToProject();
         memberToProject.setProjectId(1);
         memberToProject.setMemberId(1);
+        MemberToProjectDao memberToProjectDao = new MemberToProjectDao(dataSource);
         memberToProjectDao.insert(memberToProject);
 
         assertThat(memberToProjectDao.listAll()).contains(memberToProject);

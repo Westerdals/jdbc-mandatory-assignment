@@ -1,6 +1,7 @@
 package no.group37;
 
 import javax.sql.DataSource;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,9 +28,7 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
     }
 
     public long insert(MemberToProject memberToProject) throws SQLException {
-        return insert(memberToProject,
-                "insert into member_to_project (project_id, member_id) values (?, ?)"
-        );
+        return insert(memberToProject, "insert into member_to_project (project_id, member_id) values (?, ?)");
     }
 
     public List<MemberToProject> listAll() throws SQLException {
