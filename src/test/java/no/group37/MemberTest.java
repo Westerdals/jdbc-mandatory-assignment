@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.SQLException;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class MemberTest {
 
@@ -22,6 +24,6 @@ public class MemberTest {
         member.setId(1);
         MemberDao memberDao = new MemberDao(dataSource);
         memberDao.insert(member);
-        //assertThat(member).hasNoNullFieldsOrProperties();
+        assertThat(memberDao.listAll()).contains(member);
     }
 }
