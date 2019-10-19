@@ -1,5 +1,7 @@
 package no.group37;
 
+import java.util.Objects;
+
 public class Member {
     private String memberName;
     private String mail;
@@ -26,19 +28,23 @@ public class Member {
         this.id = id;
     }
 
-    public long getId(){
-        return this.id;
-    }
-
     @Override
     public String toString() {
         return   id + ". Name: " + memberName + " Email: " + mail + "\n";
-
-                /*"Member{" +
-                "memberName='" + memberName + '\'' +
-                ", mail='" + mail + '\'' +
-                ", id ='" + id + '\'' +
-                '}'; */
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(memberName, member.memberName) &&
+                Objects.equals(mail, member.mail) &&
+                Objects.equals(id, member.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(memberName, mail, id);
+    }
 }

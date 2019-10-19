@@ -14,7 +14,7 @@ import java.util.Properties;
 import java.util.Scanner;
 
 
-public class ProjectDao extends AbstractDao<String> {
+public class ProjectDao extends AbstractDao<Project> {
 
 
     public ProjectDao(DataSource dataSource) {
@@ -22,15 +22,17 @@ public class ProjectDao extends AbstractDao<String> {
     }
 
     @Override
-    public void insertObject(String projectName, PreparedStatement statement) throws SQLException {
-
-        statement.setString(1, projectName);
+    public void insertObject(Project project, PreparedStatement statement) throws SQLException {
+        statement.setString(1, project.getName());
     }
 
 
     @Override
-    protected String readObject(ResultSet rs) throws SQLException {
-        return rs.getString("name");
+    protected Project readObject(ResultSet rs) throws SQLException {
+        Project project = new Project();
+        project.setId(rs.getLong("id"));
+        project.setProjectName(rs.getString("name"));
+        return project;
     }
 
 
@@ -48,19 +50,21 @@ public class ProjectDao extends AbstractDao<String> {
 
         Flyway.configure().dataSource(dataSource).load().migrate();
 
+        Project project = new Project();
+        project.setProjectName(projectName);
         ProjectDao tidyProject = new ProjectDao(dataSource);
-        tidyProject.insert(projectName);
+        tidyProject.insert(project);
 
         System.out.println(tidyProject.listAll());
     }
 
-    public long insert(String projectName) throws SQLException {
-        return insert(projectName,
+    public long insert(Project project) throws SQLException {
+        return insert(project,
                 "insert into projects (name) values (?)"
         );
     }
 
-    public List<String> listAll() throws SQLException {
+    public List<Project> listAll() throws SQLException {
         return listAll(
                 "select * from projects"
         );
