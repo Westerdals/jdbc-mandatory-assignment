@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class AbstractDao<T> {
     protected DataSource dataSource;
-    public static long id=0;
+
 
     public AbstractDao(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -26,8 +26,7 @@ public abstract class AbstractDao<T> {
 
                 ResultSet generatedKeys = statement.getGeneratedKeys();
                 generatedKeys.next();
-                id = generatedKeys.getLong(1);
-                return id;
+                return  generatedKeys.getLong(1);
             }
         }
     }
@@ -46,6 +45,8 @@ public abstract class AbstractDao<T> {
             }
         }
     }
+
+
 
     protected abstract T readObject(ResultSet rs) throws SQLException;
 }

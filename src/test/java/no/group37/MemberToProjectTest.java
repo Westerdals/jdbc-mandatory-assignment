@@ -7,7 +7,10 @@ import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -16,15 +19,21 @@ public class MemberToProjectTest {
 
     @Test
     void shouldPutMemberInProject() throws SQLException {
-        Long controlId;
-
 
         JdbcDataSource dataSource = new JdbcDataSource();
         dataSource.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
 
         Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
 
-        String memberName = "Frøya";
+        MemberToProjectDao memberToProjectDao = new MemberToProjectDao(dataSource);
+        MemberToProject memberToProject = new MemberToProject();
+        memberToProject.setProjectId(1);
+        memberToProject.setMemberId(1);
+        memberToProjectDao.insert(memberToProject);
+
+        assertThat(memberToProjectDao.listAll()).contains(memberToProject);
+
+        /*String memberName = "Frøya";
         String memberMail = "frøya@mail.com";
 
 
@@ -32,25 +41,21 @@ public class MemberToProjectTest {
         member.setMemberName(memberName);
         member.setMail(memberMail);
         member.setId(1);
+        Project project = new Project();
+        project.setProjectName("Ridekurs");
+        project.setId(1);
+        Project project1 = new Project();
+        project1.setProjectName("hulaballo");
+        project.setId(2);
+
 
 
 
         ProjectDao projectDao = new ProjectDao(dataSource);
         MemberDao memberDao = new MemberDao(dataSource);
-        String projectName = "Ridekurs";
-        //projectDao.insert(projectName);
-        controlId = memberDao.insert(member);
-
-        assertThat(memberDao.listAll()).contains(member);
-       //not finished!
-        //chose project you wanto to assign member to
-        //chose member you want to assign
-        //projectDao.assignProject(projectId); //chose id of project and insert into MemberToProject table
-        //memberDao.assignMember(memberId); //insert into MemberToProject table where id of project as in assignProject
-
-
-
-        //assertThat(member).hasNoNullFieldsOrProperties();
+        projectDao.insert(project);
+        projectDao.insert(project1);
+        memberDao.insert(member); */
 
     }
 }

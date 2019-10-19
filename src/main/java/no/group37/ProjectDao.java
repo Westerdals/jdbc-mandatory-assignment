@@ -6,6 +6,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 import javax.sql.DataSource;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,6 +35,8 @@ public class ProjectDao extends AbstractDao<Project> {
         project.setProjectName(rs.getString("name"));
         return project;
     }
+
+
 
 
     public static void main(String[] args) throws SQLException, IOException {
