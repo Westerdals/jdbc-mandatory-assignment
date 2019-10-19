@@ -33,7 +33,9 @@ public class MemberToProject {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
         MemberToProject that = (MemberToProject) o;
         return projectId == that.projectId &&
                 memberId == that.memberId;

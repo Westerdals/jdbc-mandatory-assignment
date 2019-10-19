@@ -1,5 +1,5 @@
 CREATE TABLE member_to_project (
-    id serial primary key,
-    project_id int  not null,
-    member_id int  not null
+    id SERIAL PRIMARY KEY,
+    project_id INT REFERENCES projects(id),
+    member_id INT REFERENCES members(id)
 );

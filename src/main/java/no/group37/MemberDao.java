@@ -39,7 +39,7 @@ public class MemberDao extends AbstractDao<Member> {
         System.out.println("Add a new member email:");
         String email = input.nextLine();
 
-        if(memberName.isEmpty() || email.isEmpty()){
+        if (memberName.isEmpty() || email.isEmpty()) {
             System.out.println("You didnt write correct name or email. Try again.");
         } else {
 
@@ -68,10 +68,14 @@ public class MemberDao extends AbstractDao<Member> {
     }
 
     public long insert(Member member) throws SQLException {
-         return insert(member, "insert into members (member_name, email) values (?, ?)");
+         return insert(member,
+                 "insert into members (member_name, email) values (?, ?)"
+         );
     }
 
     public List<Member> listAll() throws SQLException {
-        return listAll("select * from members");
+        return listAll(
+                "select * from members"
+        );
     }
 }

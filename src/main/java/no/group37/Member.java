@@ -30,7 +30,9 @@ public class Member {
 
     @Override
     public String toString() {
-        return   id + ". Name: " + memberName + " Email: " + mail + "\n";
+        return   id
+                + ". Name: " + memberName
+                + " Email: " + mail + "\n";
     }
 
     @Override

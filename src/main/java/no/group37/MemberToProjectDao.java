@@ -15,8 +15,8 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
 
     @Override
     public void insertObject(MemberToProject memberToProject, PreparedStatement statement) throws SQLException {
-        statement.setLong(1,memberToProject.getProjectId());
-        statement.setLong(2,memberToProject.getMemberId());
+        statement.setLong(1, memberToProject.getProjectId());
+        statement.setLong(2, memberToProject.getMemberId());
     }
 
     @Override
@@ -28,7 +28,9 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
     }
 
     public long insert(MemberToProject memberToProject) throws SQLException {
-        return insert(memberToProject, "insert into member_to_project (project_id, member_id) values (?, ?)");
+        return insert(memberToProject,
+                "insert into member_to_project (project_id, member_id) values (?, ?)"
+        );
     }
 
     public List<MemberToProject> listAll() throws SQLException {
