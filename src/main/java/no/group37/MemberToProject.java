@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class MemberToProject {
     private long projectId;
-    private long memberId;
+    public long memberId;
 
     public long getProjectId() {
         return projectId;
@@ -24,10 +24,7 @@ public class MemberToProject {
 
     @Override
     public String toString() {
-        return "MemberToProject{" +
-                "projectId=" + projectId +
-                ", memberId=" + memberId +
-                '}';
+        return "Name : " + memberId;
     }
 
     @Override

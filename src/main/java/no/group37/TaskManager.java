@@ -6,9 +6,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 public class TaskManager {
     public static void main(String[] args) throws IOException, SQLException {
@@ -44,10 +42,8 @@ public class TaskManager {
         System.out.println("Enter number of the project: ");
         int userChoice = Integer.parseInt(input.nextLine());
         // call the project with id = user choice
-
         System.out.println(memberToProjectDao.listSpecified(userChoice));
-
-
+        //i will join tables tomorrow
     }
 
     private static void addNewProject(Scanner input) throws IOException, SQLException {

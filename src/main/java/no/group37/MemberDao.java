@@ -1,11 +1,6 @@
 package no.group37;
 
-import org.flywaydb.core.Flyway;
-import org.postgresql.ds.PGSimpleDataSource;
-
 import javax.sql.DataSource;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
