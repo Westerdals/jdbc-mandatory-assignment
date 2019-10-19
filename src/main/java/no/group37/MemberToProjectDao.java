@@ -38,4 +38,9 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
                 "select * from member_to_project"
         );
     }
+
+    public List<MemberToProject> listSpecified(long id) throws SQLException {
+        return listAll(
+                "select * from member_to_project where project_id = " + id );
+    }
 }

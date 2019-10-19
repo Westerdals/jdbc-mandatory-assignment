@@ -36,31 +36,6 @@ public class ProjectDao extends AbstractDao<Project> {
         return project;
     }
 
-
-
-
-    public static void main(String[] args) throws SQLException, IOException {
-        System.out.println("Add a new project");
-        String projectName = new Scanner(System.in).nextLine();
-
-        Properties properties = new Properties();
-        properties.load(new FileReader("projectdb.properties"));
-
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
-        dataSource.setUrl(properties.getProperty("dataSource.url"));
-        dataSource.setPassword(properties.getProperty("dataSource.password"));
-        dataSource.setUser(properties.getProperty("dataSource.user"));
-
-        Flyway.configure().dataSource(dataSource).load().migrate();
-
-        Project project = new Project();
-        project.setProjectName(projectName);
-        ProjectDao tidyProject = new ProjectDao(dataSource);
-        tidyProject.insert(project);
-
-        System.out.println(tidyProject.listAll());
-    }
-
     public long insert(Project project) throws SQLException {
         return insert(project,
                 "insert into projects (name) values (?)"
