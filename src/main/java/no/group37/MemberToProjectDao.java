@@ -26,8 +26,8 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
         return memberToProject;
     }
 
-    public long insert(MemberToProject memberToProject) throws SQLException {
-        return insert(memberToProject,
+    public void insert(MemberToProject memberToProject) throws SQLException {
+         insert(memberToProject,
                 "insert into member_to_project (project_id, member_id) values (?, ?)"
         );
     }
@@ -42,4 +42,10 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
         return listAll(
                 "select * from member_to_project where project_id = " + id );
     }
+
+    // select * from  members join  projectmembers on members.id = projectmembers.member_id join projects on projects.id = projectmembers.project_id where projectmembers.project_id =
+
+
+
+
 }

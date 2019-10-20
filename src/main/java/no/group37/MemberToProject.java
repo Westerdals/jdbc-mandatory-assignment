@@ -24,7 +24,7 @@ public class MemberToProject {
 
     @Override
     public String toString() {
-        return "Name : " + memberId;
+        return "ProjectID : + " + projectId + "Name : " + memberId;
     }
 
     @Override

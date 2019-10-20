@@ -18,15 +18,15 @@ public abstract class AbstractDao<T> {
 
     public abstract void insertObject(T project, PreparedStatement statement) throws SQLException;
 
-    public long insert(T projectName, String sql1) throws SQLException {
+    public void insert(T projectName, String sql1) throws SQLException {
         try (Connection conn = dataSource.getConnection()) {
-            try (PreparedStatement statement = conn.prepareStatement(sql1, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            try (PreparedStatement statement = conn.prepareStatement(sql1/*, PreparedStatement.RETURN_GENERATED_KEYS*/)) {
                 insertObject(projectName, statement);
                 statement.executeUpdate();
 
-                ResultSet generatedKeys = statement.getGeneratedKeys();
+                /*ResultSet generatedKeys = statement.getGeneratedKeys();
                 generatedKeys.next();
-                return  generatedKeys.getLong(1);
+                return  generatedKeys.getLong(1);*/
             }
         }
     }

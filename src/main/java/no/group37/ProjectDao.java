@@ -30,8 +30,8 @@ public class ProjectDao extends AbstractDao<Project> {
         return project;
     }
 
-    public long insert(Project project) throws SQLException {
-        return insert(project,
+    public void insert(Project project) throws SQLException {
+        insert(project,
                 "insert into projects (name) values (?)"
         );
     }
@@ -41,4 +41,11 @@ public class ProjectDao extends AbstractDao<Project> {
                 "select * from projects"
         );
     }
+
+    public List<Project> listSelectedProjects(long id) throws SQLException {
+        return listAll(
+                "select * from projects where id=" +id
+        );
+    }
+
 }

@@ -36,13 +36,33 @@ public class TaskManager {
         PGSimpleDataSource dataSource = getDataSource();
         ProjectDao projectDao = new ProjectDao(dataSource);
         MemberToProjectDao memberToProjectDao = new MemberToProjectDao(dataSource);
+        MemberToProject memberToProject = new MemberToProject();
+        MemberDao memberDao = new MemberDao(dataSource);
+
 
         System.out.println("Which project you want to start?");
         System.out.println(projectDao.listAll());
         System.out.println("Enter number of the project: ");
         int userChoice = Integer.parseInt(input.nextLine());
+        System.out.println("Project : " + projectDao.listSelectedProjects(userChoice));
+        System.out.println("List of members: " + memberDao.listAll());
+        System.out.println("Choose a member you want to assign: ");
+        int userChoiceMember = Integer.parseInt(input.nextLine());
+
+        if(memberToProjectDao.listSpecified(userChoiceMember).contains("Name: Marcin")){
+            System.out.println("This member is already assigned to this project");
+        } else {
+            memberToProject.setProjectId(userChoice);
+            memberToProject.setMemberId(userChoiceMember);
+            memberToProjectDao.insert(memberToProject);
+            System.out.println("Members assigned to this project: " + memberDao.listAssignedMembers(userChoice));
+        }
+
+
+        //if a member is already assigned "this member is already assigned to this project
+
         // call the project with id = user choice
-        System.out.println(memberToProjectDao.listSpecified(userChoice));
+        //System.out.println(memberDao.listAssignedMembers(userChoice));
         //i will join tables tomorrow
     }
 
