@@ -4,3 +4,4 @@ CREATE TABLE member_to_project (
     primary key (project_id, member_id)
 
 );
+
