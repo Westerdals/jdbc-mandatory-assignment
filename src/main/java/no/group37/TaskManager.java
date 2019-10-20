@@ -55,7 +55,7 @@ public class TaskManager {
             System.out.println("Members assigned to this project: " + memberDao.listAssignedMembers(userChoiceProject));
         } catch (PSQLException e) {
            if (memberToProjectDao.selectUnique(userChoiceProject, userChoiceMember).size() > 0) {
-               System.out.println("Member " + userChoiceMember + " is already assigned to project " + );
+               System.out.println("Member " + userChoiceMember + " is already assigned to project " + userChoiceProject);
            } else {
                System.out.println("Unhandled exception in function assignMemberToProject \n" + e);
            }
