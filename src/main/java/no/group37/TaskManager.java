@@ -18,8 +18,10 @@ public class TaskManager  {
     }
 
     private static void mainMenuWindow(Scanner input) throws IOException, SQLException {
-        System.out.println("Main Menu \n" + "1. Add a new member \n" + "2. Add a new project \n" +
-                "3. Assign to a project");
+        System.out.println("Main Menu \n"
+                + "1. Add a new member \n"
+                + "2. Add a new project \n"
+                + "3. Assign to a project");
         int userChoice = Integer.parseInt(input.nextLine());
 
         if (userChoice == 1) {
@@ -47,12 +49,14 @@ public class TaskManager  {
                 .replace("]", "")
                 .replace(",", ""));
 
+
         System.out.println("Enter number of the project: ");
         int userChoiceProject = Integer.parseInt(input.nextLine());
         System.out.println("Project : " + Arrays.toString((projectDao.listSelectedProjects(userChoiceProject)).toArray())
                 .replace("[", " ")
                 .replace("]", "")
                 .replace(",", ""));
+
 
         System.out.println("List of members: \n " + Arrays.toString((memberDao.listAll()).toArray())
                 .replace("[", " ")
@@ -140,7 +144,6 @@ public class TaskManager  {
             member.setMail(email);
             MemberDao memberDao = new MemberDao(dataSource);
             memberDao.insert(member);
-            // im gonna turn this line below into a method :P so its not that long. the code below does that we dont print brackets of array anymore so it looks nicer
             //System.out.println(printArray(memberDao.listAll()));
         }
 
@@ -170,7 +173,7 @@ public class TaskManager  {
     }
 
     //problem here. it wants to me print concrete class object. i dont know how to fix it yet :P
-    private static String printArray(List<Class> list){
+    private static String printArray(List<Class> list) {
         return Arrays.toString((list).toArray())
                 .replace("[", " ")
                 .replace("]", "")

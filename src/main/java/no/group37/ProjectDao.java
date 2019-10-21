@@ -44,7 +44,7 @@ public class ProjectDao extends AbstractDao<Project> {
 
     public List<Project> listSelectedProjects(long id) throws SQLException {
         return listAll(
-                "select * from projects where id=" +id
+                "select * from projects where id=" + id
         );
     }
 
