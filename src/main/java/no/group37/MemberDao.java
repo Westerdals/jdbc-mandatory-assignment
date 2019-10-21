@@ -26,8 +26,8 @@ public class MemberDao extends AbstractDao<Member> {
         return member;
     }
 
-    public void insert(Member member) throws SQLException {
-         insert(member,
+    public long insert(Member member) throws SQLException {
+         return insert(member,
                  "insert into members (member_name, email) values (?, ?)"
          );
     }
@@ -43,6 +43,21 @@ public class MemberDao extends AbstractDao<Member> {
                         "join projects on projects.id = member_to_project.project_id where member_to_project.project_id ="
                         + id
         );
+    }
+
+    public Member retrieve(long id) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement("select * from members where id= ?")) {
+                statement.setLong(1, id);
+                try (ResultSet rs = statement.executeQuery()) {
+                    if (rs.next()) {
+                        return readObject(rs);
+                    } else {
+                        return null;
+                    }
+                }
+            }
+        }
     }
 
     public String listToString(List <Member> member){

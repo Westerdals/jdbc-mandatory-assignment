@@ -2,9 +2,11 @@ package no.group37;
 
 import javax.sql.DataSource;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,8 +33,8 @@ public class ProjectDao extends AbstractDao<Project> {
         return project;
     }
 
-    public void insert(Project project) throws SQLException {
-        insert(project,
+    public long insert(Project project) throws SQLException {
+        return insert(project,
                 "insert into projects (name) values (?)"
         );
     }
@@ -47,6 +49,21 @@ public class ProjectDao extends AbstractDao<Project> {
         return listAll(
                 "select * from projects where id=" + id
         );
+    }
+
+    public Project retrieve(long id) throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement("select * from projects where id= ?")) {
+                statement.setLong(1, id);
+                try (ResultSet rs = statement.executeQuery()) {
+                    if (rs.next()) {
+                        return readObject(rs);
+                    } else {
+                    return null;
+                    }
+                }
+            }
+        }
     }
 
     public String listToString(List <Project> project){

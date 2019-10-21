@@ -1,34 +1,42 @@
 package no.group37;
 
-import org.flywaydb.core.Flyway;
 import org.h2.jdbcx.JdbcDataSource;
 import org.junit.jupiter.api.Test;
-
 import java.sql.SQLException;
-import java.util.Random;
 import static org.assertj.core.api.Assertions.*;
 
 
 
 public class ProjectTest {
 
+    private JdbcDataSource dataSource = DatabaseTest.testDataSource();
+
+
     @Test
-    void shouldRetrieveStoredProjects() throws SQLException {
-        JdbcDataSource dataSource = new JdbcDataSource();
-        dataSource.setUrl("jdbc:h2:mem:test;DB_CLOSE_DELAY=-1");
+    void shouldFindStoredProjects() throws SQLException {
+        ProjectDao projectDao = new ProjectDao(dataSource);
+        Project project = sampleProject();
+        long id = projectDao.insert(project);
+        project.setId(id);
+        assertThat(projectDao.listAll()).contains(project);
+    }
 
-        Flyway.configure().baselineOnMigrate(true).dataSource(dataSource).load().migrate();
+    @Test
+    void shouldSaveAllProjectFields() throws SQLException {
+        ProjectDao projectDao = new ProjectDao(dataSource);
+        Project project = sampleProject();
+        long id = projectDao.insert(project);
+        project.setId(id);
+        assertThat(project).hasNoNullFieldsOrProperties();
+        assertThat(projectDao.retrieve(id))
+                .isEqualToComparingFieldByField(project);
+    }
 
-        ProjectDao dao = new ProjectDao(dataSource);
-        String projectName = "Java Project";
+    private Project sampleProject(){
         Project project = new Project();
+        String projectName = "Java Project";
         project.setProjectName(projectName);
-        project.setId(1);
-        dao.insert(project);
-        assertThat(dao.listAll()).contains(project);
+        return project;
     }
 
-    private String pickOne(String[] strings) {
-        return strings[new Random().nextInt(strings.length)];
-    }
 }

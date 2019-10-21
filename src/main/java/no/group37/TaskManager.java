@@ -18,10 +18,13 @@ public class TaskManager  {
     }
 
     private static void mainMenuWindow(Scanner input) throws IOException, SQLException {
-        System.out.println("Main Menu \n"
-                + "1. Add a new member \n"
-                + "2. Add a new project \n"
-                + "3. Assign to a project");
+        System.out.println("**********\n" +
+                "Main Menu \n" +
+                "**********\n"
+                + "1. Members \n"
+                + "2. Projects \n"
+                + "3. Assign to a project\n"
+                + "4. Exit program");
         int userChoice = Integer.parseInt(input.nextLine());
 
         if (userChoice == 1) {
@@ -32,6 +35,9 @@ public class TaskManager  {
         }
         else if (userChoice == 3) {
             assignMemberToProject(input);
+        }
+        else if (userChoice == 4) {
+            System.exit(0);
         }
     }
 
@@ -60,7 +66,7 @@ public class TaskManager  {
         memberToProject.setProjectId(userChoiceProject);
         memberToProject.setMemberId(userChoiceMember);
         try {
-            memberToProjectDao.insert(memberToProject);
+            memberToProjectDao.insertMemberToProject(memberToProject);
             System.out.println("Members assigned to this project:\n"
                     + memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject)));
 
@@ -74,31 +80,35 @@ public class TaskManager  {
     }
 
     private static void addNewProject(Scanner input) throws IOException, SQLException {
-        System.out.println("Add a new project name");
-        String projectName = input.nextLine();
+        PGSimpleDataSource dataSource = getDataSource();
+        ProjectDao projectDao = new ProjectDao(dataSource);
+        System.out.println(
+                        "********\n" +
+                        "Projects  \n" +
+                        "********\n" +
+                        "List of all projects:\n" +
+                         projectDao.listToString(projectDao.listAll()));
 
-        if (projectName.isEmpty()) {
-            System.out.println("You didnt write any name. Try again");
-        } else {
-            PGSimpleDataSource dataSource = getDataSource();
-
-            Project project = new Project();
-            project.setProjectName(projectName);
-            ProjectDao projectDao = new ProjectDao(dataSource);
-            projectDao.insert(project);
-            System.out.println(projectDao.listToString(projectDao.listAll()));
-
-        }
-
-        System.out.println("1. Add another project \n" + "2. Go back to main menu");
+        System.out.println("1. Add a new project\n" +
+                           "2. Back to main menu");
         int userChoice = Integer.parseInt(input.nextLine());
+
         if (userChoice == 1) {
-            addNewProject(input);
+            System.out.println("Add a new project name:");
+            String projectName = input.nextLine();
+            if (projectName.isEmpty()) {
+                System.out.println("You didnt write any name. Try again");
+                addNewProject(input);}
+                else{
+                Project project = new Project();
+                project.setProjectName(projectName);
+                projectDao.insert(project);
+                addNewProject(input);
+                }
         }
         else if (userChoice == 2) {
             mainMenuWindow(input);
         }
-
     }
 
     private static void addNewMember(Scanner input) throws IOException, SQLException {
