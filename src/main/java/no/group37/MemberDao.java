@@ -44,4 +44,11 @@ public class MemberDao extends AbstractDao<Member> {
                         + id
         );
     }
+
+    public String listToString(List <Member> member){
+        return Arrays.toString((member).toArray())
+                .replace("[", " ")
+                .replace("]", "")
+                .replace(",", "");
+    }
 }

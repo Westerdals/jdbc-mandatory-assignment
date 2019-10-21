@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 public class MemberToProjectDao extends AbstractDao<MemberToProject> {
@@ -49,6 +50,13 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
                 "select * from member_to_project where project_id = " + project_id
                         + " and member_id = " + member_id
         );
+    }
+
+    public String listToString(List <MemberToProject> memberToProject){
+        return Arrays.toString((memberToProject).toArray())
+                .replace("[", " ")
+                .replace("]", "")
+                .replace(",", "");
     }
 
     // select * from  members join  projectmembers on members.id = projectmembers.member_id join projects on projects.id = projectmembers.project_id where projectmembers.project_id =

@@ -44,25 +44,15 @@ public class TaskManager  {
 
 
         System.out.println("Which project you want to start?");
-        System.out.println(Arrays.toString((projectDao.listAll()).toArray())
-                .replace("[", " ")
-                .replace("]", "")
-                .replace(",", ""));
-
+        System.out.println(projectDao.listToString(projectDao.listAll()));
 
         System.out.println("Enter number of the project: ");
         int userChoiceProject = Integer.parseInt(input.nextLine());
-        System.out.println("Project : " + Arrays.toString((projectDao.listSelectedProjects(userChoiceProject)).toArray())
-                .replace("[", " ")
-                .replace("]", "")
-                .replace(",", ""));
+        System.out.println("Project : " + projectDao.listSelectedProjects(userChoiceProject));
 
 
-        System.out.println("List of members: \n " + Arrays.toString((memberDao.listAll()).toArray())
-                .replace("[", " ")
-                .replace("]", "")
-                .replace(",", ""));
-        System.out.println("Choose a member you want to assign: ");
+        System.out.println("List of members: \n" + memberDao.listToString(memberDao.listAll()));
+
         int userChoiceMember = Integer.parseInt(input.nextLine());
 
 
@@ -71,10 +61,9 @@ public class TaskManager  {
         memberToProject.setMemberId(userChoiceMember);
         try {
             memberToProjectDao.insert(memberToProject);
-            System.out.println("Members assigned to this project: " + Arrays.toString((memberDao.listAssignedMembers(userChoiceProject)).toArray())
-                    .replace("[", " ")
-                    .replace("]", "")
-                    .replace(",", ""));
+            System.out.println("Members assigned to this project:\n"
+                    + memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject)));
+
         } catch (PSQLException e) {
            if (memberToProjectDao.selectUnique(userChoiceProject, userChoiceMember).size() > 0) {
                System.out.println("Member " + userChoiceMember + " is already assigned to project " + userChoiceProject);
@@ -82,18 +71,6 @@ public class TaskManager  {
                System.out.println("Unhandled exception in function assignMemberToProject \n" + e);
            }
         }
-
-        //not finished yet 
-       /* System.out.println("1. Assign another member \n" + "2. Choose other project \n" + "3. Go back to main menu" );
-        int userChoice = Integer.parseInt(input.nextLine());
-        if (userChoice == 1) {
-            addNewProject(input);
-        }
-        else if (userChoice == 2) {
-            mainMenuWindow(input);
-        } */
-
-        //mainMenuWindow(input);
     }
 
     private static void addNewProject(Scanner input) throws IOException, SQLException {
@@ -109,10 +86,8 @@ public class TaskManager  {
             project.setProjectName(projectName);
             ProjectDao projectDao = new ProjectDao(dataSource);
             projectDao.insert(project);
-            System.out.println(Arrays.toString((projectDao.listAll()).toArray())
-                    .replace("[", " ")
-                    .replace("]", "")
-                    .replace(",", ""));
+            System.out.println(projectDao.listToString(projectDao.listAll()));
+
         }
 
         System.out.println("1. Add another project \n" + "2. Go back to main menu");
@@ -144,7 +119,7 @@ public class TaskManager  {
             member.setMail(email);
             MemberDao memberDao = new MemberDao(dataSource);
             memberDao.insert(member);
-            //System.out.println(printArray(memberDao.listAll()));
+            System.out.println(memberDao.listToString(memberDao.listAll()));
         }
 
         System.out.println("1. Add another member \n" + "2. Go back to main menu");
@@ -170,14 +145,6 @@ public class TaskManager  {
 
         Flyway.configure().dataSource(dataSource).load().migrate();
         return dataSource;
-    }
-
-    //problem here. it wants to me print concrete class object. i dont know how to fix it yet :P
-    private static String printArray(List<Class> list) {
-        return Arrays.toString((list).toArray())
-                .replace("[", " ")
-                .replace("]", "")
-                .replace(",", "");
     }
 }
 

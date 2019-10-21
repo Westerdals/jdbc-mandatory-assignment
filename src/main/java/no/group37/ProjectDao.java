@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -46,6 +47,13 @@ public class ProjectDao extends AbstractDao<Project> {
         return listAll(
                 "select * from projects where id=" + id
         );
+    }
+
+    public String listToString(List <Project> project){
+        return Arrays.toString((project).toArray())
+                .replace("[", " ")
+                .replace("]", "")
+                .replace(",", "");
     }
 
 }

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractDao<T> {
@@ -46,6 +47,12 @@ public abstract class AbstractDao<T> {
         }
     }
 
+    public String listToString(List <T> object){
+        return Arrays.toString((object).toArray())
+                .replace("[", " ")
+                .replace("]", "")
+                .replace(",", "");
+    }
 
 
     protected abstract T readObject(ResultSet rs) throws SQLException;
