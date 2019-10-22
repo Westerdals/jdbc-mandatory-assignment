@@ -56,7 +56,7 @@ public class TaskManager  {
         System.out.println("Choose a project ID:");
         int userChoiceProject = Integer.parseInt(input.nextLine());
         System.out.println("Project : " + projectDao.listToString(projectDao.listSelectedProjects(userChoiceProject)));
-        System.out.println("Members already assigned to this project: \n" + memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject)));
+        System.out.println("Members already assigned to this project: \n" + checkIfAnyMembersAssigned(memberDao, userChoiceProject)+"\n");
         printMembersList(memberDao);
         System.out.println("Choose ID of a member you want to add to this project:");
         int userChoiceMember = Integer.parseInt(input.nextLine());
@@ -112,14 +112,6 @@ public class TaskManager  {
         }
     }
 
-    private static void printProjectsList(ProjectDao projectDao) throws SQLException {
-        System.out.println(
-                        "List of all projects:\n" +
-                        " ID |  Name\n" +
-                        "--------------\n"+
-                        projectDao.listToString(projectDao.listAll()) +
-                        "--------------\n");
-    }
 
     private static void addNewMember(Scanner input) throws IOException, SQLException {
             PGSimpleDataSource dataSource = getDataSource();
@@ -141,7 +133,7 @@ public class TaskManager  {
             String memberMail = input.nextLine();
 
             if (memberName.isEmpty() || memberMail.isEmpty() ) {
-                System.out.println("You must fill bot fields. Try again");
+                System.out.println("You must fill both fields. Try again");
                 addNewMember(input);}
             else{
                 Member member = new Member();
@@ -154,6 +146,24 @@ public class TaskManager  {
         else if (userChoice == 2) {
             mainMenuWindow(input);
         }
+    }
+
+    private static String checkIfAnyMembersAssigned(MemberDao memberDao, long userChoiceProject) throws SQLException {
+        if (memberDao.listAssignedMembers(userChoiceProject).isEmpty()){
+            return "None";
+        }
+        else{
+            return memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject));
+        }
+    }
+
+    private static void printProjectsList(ProjectDao projectDao) throws SQLException {
+        System.out.println(
+                        "List of all projects:\n" +
+                        " ID |  Name\n" +
+                        "--------------\n"+
+                        projectDao.listToString(projectDao.listAll()) +
+                        "--------------\n");
     }
 
     private static void printMembersList(MemberDao memberDao) throws SQLException {

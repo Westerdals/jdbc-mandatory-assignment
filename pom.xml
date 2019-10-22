@@ -62,14 +62,6 @@
         </dependency>
     </dependencies>
 
-    <!--
-    Her må du legge til:
-    - Prosjektet må bygge med Java 11 (oppsett av maven-compiler-plugin)
-    - Prosjektet må bruke JUnit 5
-    - `mvn test` må kjøre testene (oppsett av maven-surefire-plugin og junit-jupiter-engine)
-    - Etter å ha kjørt `mvn package` må man kunne kjøre prosjektets main-class med `java -jar target/http-server-1.0-SNAPSHOT.jar`
-    -->
-
     <build>
         <plugins>
             <plugin>

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class MemberToProject {
     private long projectId;
-    public long memberId;
+    private long memberId;
 
     public long getProjectId() {
         return projectId;

@@ -46,12 +46,6 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
         );
     }
 
-    public List<MemberToProject> selectWhereProjectId(long project_id) throws SQLException {
-        return listAll(
-                "select * from member_to_project where project_id = " + project_id
-        );
-    }
-
     public List<MemberToProject> selectUnique(long project_id, long member_id) throws SQLException {
         return listAll(
                 "select * from member_to_project where project_id = " + project_id
