@@ -23,7 +23,7 @@ public class TaskManager  {
                 "**********\n"
                 + "1. Members \n"
                 + "2. Projects \n"
-                + "3. Assign to a project\n"
+                + "3. Assign member to a project\n"
                 + "4. Exit program");
         int userChoice = Integer.parseInt(input.nextLine());
 
@@ -48,20 +48,19 @@ public class TaskManager  {
         MemberToProject memberToProject = new MemberToProject();
         MemberDao memberDao = new MemberDao(dataSource);
 
-
-        System.out.println("Which project you want to start?");
-        System.out.println(projectDao.listToString(projectDao.listAll()));
-
-        System.out.println("Enter number of the project: ");
+        System.out.println(
+                        "******************************\n" +
+                        "Assign member to the project  \n" +
+                        "******************************\n");
+        printProjectsList(projectDao);
+        System.out.println("Choose a project ID:");
         int userChoiceProject = Integer.parseInt(input.nextLine());
-        System.out.println("Project : " + projectDao.listSelectedProjects(userChoiceProject));
-
-
-        System.out.println("List of members: \n" + memberDao.listToString(memberDao.listAll()));
-
+        System.out.println("Project : " + projectDao.listToString(projectDao.listSelectedProjects(userChoiceProject)));
+        System.out.println("Members already assigned to this project: \n" + memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject)));
+        printMembersList(memberDao);
+        System.out.println("Choose ID of a member you want to add to this project:");
         int userChoiceMember = Integer.parseInt(input.nextLine());
-
-
+        System.out.println(memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject)));
 
         memberToProject.setProjectId(userChoiceProject);
         memberToProject.setMemberId(userChoiceMember);
@@ -72,25 +71,27 @@ public class TaskManager  {
 
         } catch (PSQLException e) {
            if (memberToProjectDao.selectUnique(userChoiceProject, userChoiceMember).size() > 0) {
-               System.out.println("Member " + userChoiceMember + " is already assigned to project " + userChoiceProject);
+               System.out.println("This member is already assigned to this project");
+               assignMemberToProject(input);
            } else {
                System.out.println("Unhandled exception in function assignMemberToProject \n" + e);
            }
         }
+        assignMemberToProject(input);
     }
 
     private static void addNewProject(Scanner input) throws IOException, SQLException {
         PGSimpleDataSource dataSource = getDataSource();
         ProjectDao projectDao = new ProjectDao(dataSource);
         System.out.println(
-                        "********\n" +
-                        "Projects  \n" +
-                        "********\n" +
-                        "List of all projects:\n" +
-                         projectDao.listToString(projectDao.listAll()));
+                "********\n" +
+                "Projects  \n" +
+                "********\n");
+        printProjectsList(projectDao);
 
-        System.out.println("1. Add a new project\n" +
-                           "2. Back to main menu");
+        System.out.println(
+                        "1. Add a new project\n" +
+                        "2. Back to main menu");
         int userChoice = Integer.parseInt(input.nextLine());
 
         if (userChoice == 1) {
@@ -111,37 +112,57 @@ public class TaskManager  {
         }
     }
 
+    private static void printProjectsList(ProjectDao projectDao) throws SQLException {
+        System.out.println(
+                        "List of all projects:\n" +
+                        " ID |  Name\n" +
+                        "--------------\n"+
+                        projectDao.listToString(projectDao.listAll()) +
+                        "--------------\n");
+    }
+
     private static void addNewMember(Scanner input) throws IOException, SQLException {
-        System.out.println("Add a new member name:");
-        String memberName = input.nextLine();
-        System.out.println("Add a new member email:");
-        String email = input.nextLine();
-
-        if (memberName.isEmpty() || email.isEmpty()) {
-            System.out.println("You didnt write correct name or email. Try again.");
-        } else {
-
             PGSimpleDataSource dataSource = getDataSource();
-
-
-            Member member = new Member();
-            member.setMemberName(memberName);
-            member.setMail(email);
             MemberDao memberDao = new MemberDao(dataSource);
-            memberDao.insert(member);
-            System.out.println(memberDao.listToString(memberDao.listAll()));
-        }
-
-        System.out.println("1. Add another member \n" + "2. Go back to main menu");
+        System.out.println(
+                "********\n" +
+                "Members  \n" +
+                "********\n");
+        printMembersList(memberDao);
+        System.out.println(
+                "1. Add a new member\n" +
+                "2. Back to main menu");
         int userChoice = Integer.parseInt(input.nextLine());
+
         if (userChoice == 1) {
-            addNewMember(input);
+            System.out.println("Add a new member name:");
+            String memberName = input.nextLine();
+            System.out.println("Add a new member mail:");
+            String memberMail = input.nextLine();
+
+            if (memberName.isEmpty() || memberMail.isEmpty() ) {
+                System.out.println("You must fill bot fields. Try again");
+                addNewMember(input);}
+            else{
+                Member member = new Member();
+                member.setMemberName(memberName);
+                member.setMail(memberMail);
+                memberDao.insert(member);
+                addNewMember(input);
+            }
         }
         else if (userChoice == 2) {
             mainMenuWindow(input);
         }
+    }
 
-
+    private static void printMembersList(MemberDao memberDao) throws SQLException {
+        System.out.println(
+                        "List of all members:\n" +
+                        " ID |  Name + Mail\n" +
+                        "-------------------------\n"+
+                        memberDao.listToString(memberDao.listAll()) +
+                        "-------------------------\n");
     }
 
     private static PGSimpleDataSource getDataSource() throws IOException {

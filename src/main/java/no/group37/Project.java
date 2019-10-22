@@ -37,6 +37,6 @@ public class Project {
 
     @Override
     public String toString() {
-        return   id + ". Name: " + name +  "\n";
+        return   id + "  |  " + name +  "\n";
     }
 }
