@@ -1,0 +1,54 @@
+@startuml
+MemberToProject <-- Member
+MemberToProject <-- Project
+
+class Member {
+Long id
+String memberName
+String mail
+void setMemberName(String)
+String getMemberName()
+void setMail(String)
+String getMail()
+void setId(long)
+String toString()
+boolean equals(Object)
+Int hashCode()
+}
+
+class MemberToProject {
+Long projectId
+Long memberId
+long getProject()
+void setProjectId(long)
+Long getMemberId()
+void setMemberId(long)
+String toString()
+boolean equals(Object)
+Int hashCode()
+}
+
+class Project {
+Long id
+String name
+void setId(long)
+void setProjectName(String)
+String getName()
+boolean equals(Object)
+Project(Project)
+Int hashCode
+String toString()
+}
+
+class TaskManager {
+void main
+void mainMenuWindow(Scanner)
+void assignMemberToProject(Scanner)
+void addNewProject(Scanner)
+void addNewMember(Scanner)
+String checkIfAnyMembersAssigned(MemberDao, long)
+void printProjectsList(Projectdao)
+void printMembersList(MemberDao)
+PGSimpleDataSource getDataSource()
+}
+@enduml
