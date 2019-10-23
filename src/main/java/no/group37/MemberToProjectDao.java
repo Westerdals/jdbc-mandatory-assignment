@@ -53,7 +53,7 @@ public class MemberToProjectDao extends AbstractDao<MemberToProject> {
         );
     }
 
-    public String listToString(List <MemberToProject> memberToProject){
+    public String listToString(List <MemberToProject> memberToProject) {
         return Arrays.toString((memberToProject).toArray())
                 .replace("[", " ")
                 .replace("]", "")

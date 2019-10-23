@@ -32,7 +32,7 @@ public class ProjectTest {
                 .isEqualToComparingFieldByField(project);
     }
 
-    private Project sampleProject(){
+    private Project sampleProject() {
         Project project = new Project();
         String projectName = "Java Project";
         project.setProjectName(projectName);

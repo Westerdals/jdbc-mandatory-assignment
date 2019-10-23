@@ -46,7 +46,7 @@ public abstract class AbstractDao<T> {
         }
     }
 
-    public String listToString(List <T> object){
+    public String listToString(List <T> object) {
         return Arrays.toString((object).toArray())
                 .replace("[", " ")
                 .replace("]", "")

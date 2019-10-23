@@ -65,7 +65,7 @@ public class ProjectDao extends AbstractDao<Project> {
         }
     }
 
-    public String listToString(List <Project> project){
+    public String listToString(List <Project> project) {
         return Arrays.toString((project).toArray())
                 .replace("[", " ")
                 .replace("]", "")

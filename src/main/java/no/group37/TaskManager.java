@@ -100,13 +100,14 @@ public class TaskManager  {
             if (projectName.isEmpty()) {
                 System.out.println("You didnt write any name. Try again");
                 addNewProject(input);}
-                else{
+                else {
                 Project project = new Project();
                 project.setProjectName(projectName);
                 projectDao.insert(project);
                 addNewProject(input);
                 }
         }
+
         else if (userChoice == 2) {
             mainMenuWindow(input);
         }
@@ -132,10 +133,10 @@ public class TaskManager  {
             System.out.println("Add a new member mail:");
             String memberMail = input.nextLine();
 
-            if (memberName.isEmpty() || memberMail.isEmpty() ) {
+            if (memberName.isEmpty() || memberMail.isEmpty()) {
                 System.out.println("You must fill both fields. Try again");
-                addNewMember(input);}
-            else{
+                addNewMember(input); }
+            else {
                 Member member = new Member();
                 member.setMemberName(memberName);
                 member.setMail(memberMail);
@@ -143,16 +144,17 @@ public class TaskManager  {
                 addNewMember(input);
             }
         }
+
         else if (userChoice == 2) {
             mainMenuWindow(input);
         }
     }
 
     private static String checkIfAnyMembersAssigned(MemberDao memberDao, long userChoiceProject) throws SQLException {
-        if (memberDao.listAssignedMembers(userChoiceProject).isEmpty()){
+        if (memberDao.listAssignedMembers(userChoiceProject).isEmpty()) {
             return "None";
         }
-        else{
+        else {
             return memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject));
         }
     }

@@ -47,7 +47,7 @@ Dersom dere vil ta oppgaven videre for å være forberedt til eksamen kan dere *
 * [x] Programmet kan liste prosjektdeltagere fra databasen
 * [x] Programmet lar bruker opprette nye prosjektdeltagere i databasen
 * [x] Koden inneholder et godt sett med tester og testene kjører i Travis CI
-* [ ] GitHub repository er private, men delt med gruppen dere gjør hverandre vurdering på
+* [x] GitHub repository er private, men delt med gruppen dere gjør hverandre vurdering på
 * [ ] Dere har mottatt minst 2 positive og 2 korrektive GitHub issues i github repository fra en annen gruppe
 * [ ] Dere har gitt minst 2 positive og 2 korrektive GitHub issues til en annen gruppe og inkluderer link til disse fra README.md
 * [x] Veilederne er lagt til som Collaborators på GitHub repository (`alacho2`, `aridder`, `asmadsen`)

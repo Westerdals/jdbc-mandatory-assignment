@@ -60,7 +60,7 @@ public class MemberDao extends AbstractDao<Member> {
         }
     }
 
-    public String listToString(List <Member> member){
+    public String listToString(List <Member> member) {
         return Arrays.toString((member).toArray())
                 .replace("[", " ")
                 .replace("]", "")
