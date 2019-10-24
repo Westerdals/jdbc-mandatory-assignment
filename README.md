@@ -7,15 +7,13 @@ https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs
 
 ## Usage
 
-1. <Hvilken kommando bruker man for å bygge prosjektet>
-2. <Hvilken kommando bruker man for å programmet>
-3. <Hvordan oppretter man en ny prosjektdeltager?>
-4. <VALGFRITT: Hvordan oppretter man en ny prosjektoppgave>
-5. <VALGFRITT: Hvordan bruker man http server til å opprette data?> 
+1. <Før man bygger prosjektet er det anbefalt å kjøre mvn clean for å sørge for å ha en "ren database". For å bygge prosjektet må man kjøre mvn package shade:shade>
+2. <For å kjøre jar-filen, må man kjøre java -jar target/task-manager-1.0-SNAPSHOT-shaded.jar>
+3. <Man oppretter en ny prosjektdeltager ved å trykke på angitt tall i interface'et, og det samme gjelder hvilket prosjekt man ønsker å legge prosjektdeltageren til>
  
  ## Design (valgfritt)
  
-![Design](./doc/design.png)
+![Design](./doc/sequence.png)
 
  ## Implementation notes
  
