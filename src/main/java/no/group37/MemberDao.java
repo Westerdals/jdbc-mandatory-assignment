@@ -40,7 +40,7 @@ public class MemberDao extends AbstractDao<Member> {
     public List<Member> listAssignedMembers(long id) throws SQLException {
         return listAll(
                 "select * from members join member_to_project on members.id = member_to_project.member_id " +
-                        "join projects on projects.id = member_to_project.project_id where member_to_project.project_id ="
+                     " where member_to_project.project_id = "
                         + id
         );
     }
