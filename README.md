@@ -1,15 +1,18 @@
-# Prosjekt og deltager
+# Prosjekt og prosjektdeltager
 
 ![Build Status](https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs.svg?token=142TxL5hMPVBB9ybKETZ&branch=master)
 https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs
 
-<En kort forklaring på hva dette prosjektet inneholder>
+<Dette programmet er laget som en parprogrammeringsoppgave av **Ingrid-Alice Bløtekjær - iaffs** og **Marcin Janecki - amish1188** for å kunne opprette prosjekt og prosjektdeltagere ved bruk av JDBC (database).
+
+
+>
 
 ## Usage
 
-1. <Før man bygger prosjektet er det anbefalt å kjøre mvn clean for å sørge for å ha en "ren database". For å bygge prosjektet må man kjøre mvn package shade:shade>
-2. <For å kjøre jar-filen, må man kjøre java -jar target/task-manager-1.0-SNAPSHOT-shaded.jar>
-3. <Man oppretter en ny prosjektdeltager ved å trykke på angitt tall i interface'et, og det samme gjelder hvilket prosjekt man ønsker å legge prosjektdeltageren til>
+1. <For å bygge prosjektet må man kjøre mvn package shade:shade i terminalen. Det kan være en fordel å kjøre mvn clean først, men det er for å sørge for at databasen har tomme tabeller når man starter.>
+2. <For å kjøre prosjektet må man kjøre java -jar target/task-manager-1.0-SNAPSHOT-shaded.jar>
+3. <Man oppretter en ny prosjektdeltager ved å trykke på angitt tall i brukergrensesnittet, og det samme gjelder hvilket prosjekt man ønsker å legge prosjektdeltageren til, etter man har kjørt programmet.>
  
  ## Design (valgfritt)
  
@@ -17,10 +20,13 @@ https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs
 
  ## Implementation notes
  
-<Hva gjorde dere godt i implementasjonen>
+<Vi er fornøyde med brukergrensesnittet vårt, hvor brukervennlig det er, og hvor enkelt det føles å taste tall i stedet for id eller hele kommandoer når man ønsker å legge til prosjekt eller prosjektdeltager.
+Vi er faktisk veldig fornøyde med å ha fått til oppgaven relativt greit, og har et fungerende program, på den korte tiden og med de utfordringene vi har møtt underveis.>
 
-<Hva følte dere at dere ikke fikk til i implementasjonen>
+<Vi er ikke fornøyde med å ikke ha rukket å implementere prosjektoppgaver og prosjektroller.
+Vi er heller ikke fornøyd med å ikke ha implementert løsningen ved bruk av server og HTTP.
+Og vi ser også at vi kunne ha kommentert koden bedre.>
 
 ## Link to review
 
-* link to issue you registered in other group's github repository
+* https://github.com/Westerdals/pgr203-assignment-3-SeventhDisaster/issues
