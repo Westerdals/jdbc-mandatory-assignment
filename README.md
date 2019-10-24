@@ -22,7 +22,7 @@ Vi er fornøyde med brukergrensesnittet vårt, hvor brukervennlig det er, og hvo
 Vi er faktisk veldig fornøyde med å ha fått til oppgaven relativt greit, og har et fungerende program, på den korte tiden og med de utfordringene vi har møtt underveis.
 
 Vi er ikke fornøyde med å ikke ha rukket å implementere prosjektoppgaver og prosjektroller.
-Vi er heller ikke fornøyd med å ikke ha rukket å legge til bruk av server og HTTP i løsningen.
+Vi er heller ikke fornøyd med å ikke ha fått lagt til bruk av server og HTTP i løsningen.
 Og vi ser også at vi kunne ha kommentert koden bedre.
 
 ## Link to review
