@@ -8,7 +8,7 @@ I programmet har man prosjekter, prosjektdeltagere og en hjelpetabell. Det er og
 
 ## Usage
 
-1. For å bygge prosjektet må man kjøre mvn package shade:shade i terminalen. Det kan være en fordel å kjøre mvn clean først, men det er for å sørge for at databasen har tomme tabeller når man starter.
+1. For å bygge prosjektet må man kjøre mvn package shade:shade. Det kan være en fordel å kjøre mvn clean først, men det er for å sørge for at databasen har tomme tabeller når man starter.
 2. For å kjøre prosjektet må man kjøre java -jar target/task-manager-1.0-SNAPSHOT-shaded.jar.
 3. Man oppretter en ny prosjektdeltager ved å trykke på angitt tall i brukergrensesnittet, og det samme gjelder hvilket prosjekt man ønsker å legge prosjektdeltageren til.
  
