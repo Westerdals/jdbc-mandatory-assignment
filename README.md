@@ -1,7 +1,6 @@
 # Prosjekt og prosjektdeltager
 
-![Build Status](https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs.svg?token=142TxL5hMPVBB9ybKETZ&branch=master)
-https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs
+[![Build Status](https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs.svg?token=142TxL5hMPVBB9ybKETZ&branch=master)](https://travis-ci.com/Westerdals/pgr203-assignment-3-iaffs)
 
 Dette programmet er laget som en parprogrammeringsoppgave av **Ingrid-Alice Bløtekjær - iaffs** og **Marcin Janecki - amish1188** for å kunne opprette prosjekt og prosjektdeltagere ved bruk av JDBC (database).
 I programmet har man prosjekter, prosjektdeltagere og en hjelpetabell. Det er også et enkelt brukergrensesnitt som lar bruker taste inn valgt kommando basert på printmelding fra programmet.
