@@ -15,7 +15,6 @@ public class TaskManager  {
         Scanner input = new Scanner(System.in);
 
         mainMenuWindow(input);
-
     }
 
     // MAIN METHODS
@@ -93,22 +92,23 @@ public class TaskManager  {
 
 
     private static void addNewMemberInterface(Scanner input) throws IOException, SQLException {
-            PGSimpleDataSource dataSource = getDataSource();
-            MemberDao memberDao = new MemberDao(dataSource);
+        PGSimpleDataSource dataSource = getDataSource();
+        MemberDao memberDao = new MemberDao(dataSource);
         System.out.println(
                 "********\n" +
                 "Members  \n" +
                 "********\n");
         printMembersList(memberDao);
+
         System.out.println(
                 "1. Add a new member\n" +
                 "2. Back to main menu");
+
         int userChoice = Integer.parseInt(input.nextLine());
 
         if (userChoice == 1) {
             addNewMember(input, memberDao);
         }
-
         else if (userChoice == 2) {
             mainMenuWindow(input);
         }
@@ -157,21 +157,24 @@ public class TaskManager  {
         dataSource.setUser(properties.getProperty("dataSource.user"));
 
         Flyway.configure().dataSource(dataSource).load().migrate();
+
         return dataSource;
     }
 
     private static void addNewProject(Scanner input, ProjectDao projectDao) throws IOException, SQLException {
         System.out.println("Add a new project name:");
         String projectName = input.nextLine();
+
         if (projectName.isEmpty()) {
             System.out.println("You didnt write any name. Try again");
-            addNewProjectInterface(input);}
-            else {
+            addNewProjectInterface(input);
+        }
+        else {
             Project project = new Project();
             project.setProjectName(projectName);
             projectDao.insert(project);
             addNewProjectInterface(input);
-            }
+        }
     }
 
     private static void addNewMember(Scanner input, MemberDao memberDao) throws IOException, SQLException {
@@ -182,7 +185,8 @@ public class TaskManager  {
 
         if (memberName.isEmpty() || memberMail.isEmpty()) {
             System.out.println("You must fill both fields. Try again");
-            addNewMemberInterface(input); }
+            addNewMemberInterface(input);
+        }
         else {
             Member member = new Member();
             member.setMemberName(memberName);
@@ -197,11 +201,15 @@ public class TaskManager  {
         printProjectsList(projectDao);
         System.out.println("Choose a project ID:");
         int userChoiceProject = Integer.parseInt(input.nextLine());
+
         System.out.println("Project : " + projectDao.listToString(projectDao.listSelectedProjects(userChoiceProject)));
+
         System.out.println("Members already assigned to this project: \n" + checkIfAnyMembersAssigned(memberDao, userChoiceProject)+"\n");
         printMembersList(memberDao);
+
         System.out.println("Choose ID of a member you want to add to this project:");
         int userChoiceMember = Integer.parseInt(input.nextLine());
+
         System.out.println(memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject)));
 
         memberToProject.setProjectId(userChoiceProject);
