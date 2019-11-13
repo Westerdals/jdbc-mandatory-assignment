@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 
-public class TaskManager  {
+public class TaskManager {
 
     public static void main(String[] args) throws IOException, SQLException {
         Scanner input = new Scanner(System.in);
@@ -31,14 +31,11 @@ public class TaskManager  {
 
         if (userChoice == 1) {
             addNewMemberInterface(input);
-        }
-        else if (userChoice == 2) {
+        } else if (userChoice == 2) {
             addNewProjectInterface(input);
-        }
-        else if (userChoice == 3) {
+        } else if (userChoice == 3) {
             assignMemberToProjectInterface(input);
-        }
-        else if (userChoice == 4) {
+        } else if (userChoice == 4) {
             System.exit(0);
         }
     }
@@ -51,7 +48,7 @@ public class TaskManager  {
         MemberDao memberDao = new MemberDao(dataSource);
 
         System.out.println(
-                        "******************************\n" +
+                "******************************\n" +
                         "Assign member to the project  \n" +
                         "******************************\n" +
                         "1. Assign \n" +
@@ -59,9 +56,8 @@ public class TaskManager  {
         int userChoice = Integer.parseInt(input.nextLine());
 
         if (userChoice == 1) {
-            assignNewProject(input,projectDao,memberToProjectDao,memberToProject,memberDao);
-        }
-        else if (userChoice == 2) {
+            assignNewProject(input, projectDao, memberToProjectDao, memberToProject, memberDao);
+        } else if (userChoice == 2) {
             mainMenuWindow(input);
         }
     }
@@ -72,20 +68,18 @@ public class TaskManager  {
         ProjectDao projectDao = new ProjectDao(dataSource);
         System.out.println(
                 "********\n" +
-                "Projects  \n" +
-                "********\n");
+                        "Projects  \n" +
+                        "********\n");
         printProjectsList(projectDao);
 
         System.out.println(
-                        "1. Add a new project\n" +
+                "1. Add a new project\n" +
                         "2. Back to main menu");
         int userChoice = Integer.parseInt(input.nextLine());
 
         if (userChoice == 1) {
             addNewProject(input, projectDao);
-        }
-
-        else if (userChoice == 2) {
+        } else if (userChoice == 2) {
             mainMenuWindow(input);
         }
     }
@@ -96,27 +90,22 @@ public class TaskManager  {
         MemberDao memberDao = new MemberDao(dataSource);
         System.out.println(
                 "********\n" +
-                "Members  \n" +
-                "********\n");
+                        "Members  \n" +
+                        "********\n");
         printMembersList(memberDao);
 
         System.out.println(
                 "1. Add a new member\n" +
-                "2. Back to main menu");
+                        "2. Back to main menu");
 
         int userChoice = Integer.parseInt(input.nextLine());
 
         if (userChoice == 1) {
             addNewMember(input, memberDao);
-        }
-        else if (userChoice == 2) {
+        } else if (userChoice == 2) {
             mainMenuWindow(input);
         }
     }
-
-
-
-
 
 
     // METHODS USED IN MAIN METHODS
@@ -124,25 +113,25 @@ public class TaskManager  {
     private static String checkIfAnyMembersAssigned(MemberDao memberDao, long userChoiceProject) throws SQLException {
         if (memberDao.listAssignedMembers(userChoiceProject).isEmpty()) {
             return "None";
-        }
-        else {
+        } else {
             return memberDao.listToString(memberDao.listAssignedMembers(userChoiceProject));
         }
     }
+
     private static void printProjectsList(ProjectDao projectDao) throws SQLException {
         System.out.println(
-                        "List of all projects:\n" +
+                "List of all projects:\n" +
                         " ID |  Name\n" +
-                        "--------------\n"+
+                        "--------------\n" +
                         projectDao.listToString(projectDao.listAll()) +
                         "--------------\n");
     }
 
     private static void printMembersList(MemberDao memberDao) throws SQLException {
         System.out.println(
-                        "List of all members:\n" +
+                "List of all members:\n" +
                         " ID |  Name + Mail\n" +
-                        "-------------------------\n"+
+                        "-------------------------\n" +
                         memberDao.listToString(memberDao.listAll()) +
                         "-------------------------\n");
     }
@@ -168,8 +157,7 @@ public class TaskManager  {
         if (projectName.isEmpty()) {
             System.out.println("You didnt write any name. Try again");
             addNewProjectInterface(input);
-        }
-        else {
+        } else {
             Project project = new Project();
             project.setProjectName(projectName);
             projectDao.insert(project);
@@ -186,8 +174,7 @@ public class TaskManager  {
         if (memberName.isEmpty() || memberMail.isEmpty()) {
             System.out.println("You must fill both fields. Try again");
             addNewMemberInterface(input);
-        }
-        else {
+        } else {
             Member member = new Member();
             member.setMemberName(memberName);
             member.setMail(memberMail);
@@ -204,7 +191,7 @@ public class TaskManager  {
 
         System.out.println("Project : " + projectDao.listToString(projectDao.listSelectedProjects(userChoiceProject)));
 
-        System.out.println("Members already assigned to this project: \n" + checkIfAnyMembersAssigned(memberDao, userChoiceProject)+"\n");
+        System.out.println("Members already assigned to this project: \n" + checkIfAnyMembersAssigned(memberDao, userChoiceProject) + "\n");
         printMembersList(memberDao);
 
         System.out.println("Choose ID of a member you want to add to this project:");
